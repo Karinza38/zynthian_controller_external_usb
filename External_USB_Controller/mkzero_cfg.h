@@ -1,5 +1,7 @@
 /*******************************************************************************
  * MKZERO configuration
+ * 
+ * wyleu yellow/white box.
 
 |Encoder Configuration
 | Pin | Control    | Device  | Comments |
@@ -24,6 +26,29 @@
 | D21 | PB Switch  | 4 | - |
 
 ***************************************************/
+//Define pins
+#define D0     0
+#define D1     1
+#define D2     2
+#define D3     3
+#define D4     4
+#define D5     5
+#define D6     6
+#define D7     7
+#define D8     8
+#define D9     9
+#define D10    10
+#define D11    11
+#define D12    12
+#define D13    13
+#define D14    14
+#define D15    15
+#define D16    16
+#define D17    17
+#define D18    18
+#define D19    19
+#define D20    20
+#define D21    21
 
 //LED Indicator pin 
 #define led LED_BUILTIN

@@ -65,8 +65,8 @@
  * mkzero_cfg.h
  */
 //#include "hw_template_cfg.h"
-#include "black_pill_cfg.h"
-//#include "mkzero_cfg.h"
+//#include "black_pill_cfg.h"
+#include "mkzero_cfg.h"
 
 /***********************************************
  * Create the encoder instances and maps
