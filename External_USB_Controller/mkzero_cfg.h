@@ -60,11 +60,15 @@
 #define pin_invert PIN_NA
 #define default_invert false
 
+// Back (BL)
+
 #define ENC0_GND  PIN_NA
 #define ENC0_VCC  PIN_NA
 #define ENC0_SW   D5
 #define ENC0_A    D3
 #define ENC0_B    D4
+
+// Channel (TL)
 
 #define ENC1_GND  PIN_NA
 #define ENC1_VCC  PIN_NA
@@ -72,11 +76,15 @@
 #define ENC1_A    D1
 #define ENC1_B    D0
 
+// Learn/Snapshot (TR)
+
 #define ENC2_GND  PIN_NA
 #define ENC2_VCC  PIN_NA
 #define ENC2_SW   D9
 #define ENC2_A    D6
 #define ENC2_B    D11
+
+// Select (BR)
 
 #define ENC3_GND  PIN_NA
 #define ENC3_VCC  PIN_NA
