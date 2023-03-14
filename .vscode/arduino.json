@@ -1,0 +1,7 @@
+{
+    "sketch": "External_USB_Controller/External_USB_Controller.ino",
+    "board": "arduino:samd:mkrzero",
+    "port": "/dev/ttyACM0",
+    "output": "../build",
+    "programmer": "edbg"
+}

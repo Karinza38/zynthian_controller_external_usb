@@ -55,8 +55,8 @@
  S4           - "v"    "Caps Lock"
  
 ********************************************************/
-#include <SimpleRotary.h>
-#include <Keyboard.h>
+#include "SimpleRotary.h"
+#include "Keyboard.h"
 #include "encoder_helpers.h"
 
 /**********************************
@@ -72,16 +72,16 @@
  * Create the encoder instances and maps
  */
 ENCODER_DEF_PIN_MAP(back,ENC0_GND,ENC0_VCC,ENC0_SW,ENC0_A,ENC0_B);
-ENCODER_CREATE(back, KEY_DOWN_ARROW, KEY_UP_ARROW, KEY_CAPS_LOCK, KEY_ESC, KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
+ENCODER_CREATE(back, ',', '.', KEY_LEFT_CTRL, KEY_BACKSPACE, KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
 
 ENCODER_DEF_PIN_MAP(layer,ENC1_GND,ENC1_VCC,ENC1_SW,ENC1_A,ENC1_B);
-ENCODER_CREATE(layer, KEY_DOWN_ARROW, KEY_UP_ARROW, KEY_LEFT_SHIFT, 'l', KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
+ENCODER_CREATE(layer, '<', '>', KEY_LEFT_SHIFT|KEY_LEFT_CTRL, 'i', KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
 
 ENCODER_DEF_PIN_MAP(snap,ENC2_GND,ENC2_VCC,ENC2_SW,ENC2_A,ENC2_B);
-ENCODER_CREATE(snap, KEY_DOWN_ARROW, KEY_UP_ARROW, KEY_LEFT_CTRL, 's', KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
+ENCODER_CREATE(snap, '<', '>', KEY_LEFT_SHIFT, 'o', KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
 
 ENCODER_DEF_PIN_MAP(select,ENC3_GND,ENC3_VCC,ENC3_SW,ENC3_A,ENC3_B);
-ENCODER_CREATE(select, KEY_DOWN_ARROW, KEY_UP_ARROW, KEY_NONE, KEY_RETURN, KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
+ENCODER_CREATE(select, ',', '.', KEY_NONE, 'l', KEY_NONE, KEY_LEFT_SHIFT, KEY_LEFT_CTRL );
 /***********************************************/
 
 /***********************************************
