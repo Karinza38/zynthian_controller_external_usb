@@ -16,6 +16,7 @@ typedef struct KeyMap_s {
   char key_cw;
   char key_ccw;
   char mod_enc;
+  char mod2_enc;
   char key_switch;
   char mod_short;
   char mod_bold;
@@ -34,11 +35,11 @@ boolean invert_encoders = false;
  * Uses name magic so we can do things like
  * ENCODER_CREATE(select) and get everything set up.
  */
-#define ENCODER_CREATE(enc_name, enc_cw, enc_ccw, enc_mod, enc_sw, short_mod, bold_mod, long_mod ) \
+#define ENCODER_CREATE(enc_name, enc_cw, enc_ccw, enc_mod,enc_mod2, enc_sw, short_mod, bold_mod, long_mod ) \
                                  SimpleRotary r_##enc_name(r_##enc_name##_a, r_##enc_name##_b, r_##enc_name##_sw); \
                                  int r_##enc_name##_sw_time; \
                                  boolean r_##enc_name##_lp; \
-                                 KeyMap_t r_##enc_name##_map = { enc_cw, enc_ccw, enc_mod, enc_sw, short_mod, bold_mod, long_mod };
+                                 KeyMap_t r_##enc_name##_map = { enc_cw, enc_ccw, enc_mod, enc_mod2, enc_sw, short_mod, bold_mod, long_mod };
 
 //Encoders (also uses 2 GPIO pins per for GND/V+) and skip a pin to allow for JST style connectors?
 #define ENCODER_DEF_PIN_MAP(enc_name,enc_gnd,enc_vcc,enc_sw,enc_a,enc_b)  \
@@ -54,7 +55,7 @@ boolean invert_encoders = false;
 #define KEY_PRESS(k_p) { if(k_p) Keyboard.press(k_p); }while(0)      
 
 /* If Caps lock, repress to make sure it's "released" for for other keys */
-#define COMBO_KEY(key,mod) { KEY_PRESS(mod); KEY_PRESS(key); Keyboard.releaseAll(); if(mod == KEY_CAPS_LOCK){ KEY_PRESS(mod); Keyboard.releaseAll(); } }while(0)
+#define COMBO_KEY(key,mod, mod2) { KEY_PRESS(mod);KEY_PRESS(mod2); KEY_PRESS(key); Keyboard.releaseAll(); if(mod == KEY_CAPS_LOCK){ KEY_PRESS(mod); Keyboard.releaseAll(); } }while(0)
 
 
 /******************************************************************
@@ -65,7 +66,7 @@ boolean invert_encoders = false;
                         int b_##btn_name##_sw_start; \
                         int b_##btn_name##_sw_time; \
                         boolean b_##btn_name##_lp; \
-                        KeyMap_t b_##btn_name##_map = { 0, 0, 0, btn_sw, short_mod, bold_mod, long_mod };
+                        KeyMap_t b_##btn_name##_map = { 0, 0, 0, 0, btn_sw, short_mod, bold_mod, long_mod };
 
 #define BUTTON_SET_GPIO(btn_name) { if( b_##btn_name##_gpio != PIN_NA) { pinMode(b_##btn_name##_gpio, INPUT_PULLUP); } }while(0)
 
@@ -107,10 +108,10 @@ void encoder_process(SimpleRotary *encoder,int *sw_pending, boolean *long_press,
   
   if( enc == cw )
   {
-    COMBO_KEY(k_map->key_cw,k_map->mod_enc);
+    COMBO_KEY(k_map->key_cw,k_map->mod_enc, k_map->mod2_enc);
   }else if ( enc == ccw )
   {
-    COMBO_KEY(k_map->key_ccw,k_map->mod_enc);
+    COMBO_KEY(k_map->key_ccw,k_map->mod_enc, k_map->mod2_enc);
   }
 
   press_process( k_map, sw, sw_pending, long_press);
@@ -134,7 +135,7 @@ void press_process(KeyMap_t *k_map, int sw, int * sw_pending, boolean * long_pre
     
   /********** Long press, does not require release ***************/
   if( *sw_pending > sw_long && !*long_press ) {
-    COMBO_KEY(k_map->key_switch,k_map->mod_long);
+    COMBO_KEY(k_map->key_switch,k_map->mod_long,k_map->mod2_enc);
     *long_press = true;
   }
 
@@ -145,10 +146,10 @@ void press_process(KeyMap_t *k_map, int sw, int * sw_pending, boolean * long_pre
       *long_press = false; //Already sent the keys, just clear the event
     }else if ( *sw_pending > sw_bold ) {
       /************ Bold Press ************/
-    COMBO_KEY(k_map->key_switch,k_map->mod_bold);
+    COMBO_KEY(k_map->key_switch,k_map->mod_bold, k_map->mod2_enc);
     }else if ( *sw_pending > sw_short) {
       /*********** Short Press ************/
-    COMBO_KEY(k_map->key_switch,k_map->mod_short);
+    COMBO_KEY(k_map->key_switch,k_map->mod_short, k_map->mod2_enc);
     }
   }
   *sw_pending = sw;
