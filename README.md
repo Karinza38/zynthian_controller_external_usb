@@ -1,4 +1,4 @@
-# Zynthian External USB controls
+ # Zynthian External USB controls
 
 [Zynthian](http://zynthian.org) is an Open Synth Platform based in Raspberry Pi, Linux (Raspbian) and some Open Software Synthesizers.
 
